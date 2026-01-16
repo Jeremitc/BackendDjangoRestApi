@@ -1,81 +1,71 @@
-# Backend Django Rest API - Asistente Virtual
+# Backend Django Rest API - Template Reutilizable
 
-Este proyecto es una API RESTful desarrollada con **Django** y **Django REST Framework (DRF)**. Su propósito principal es servir como backend para gestionar usuarios e interacciones en un contexto de asistente virtual.
+Este repositorio contiene una estructura base sólida y reutilizable para proyectos Backend utilizando **Django** y **Django REST Framework (DRF)**.
 
-## 🚀 Características Principales
+Está diseñado para servir como punto de partida para cualquier aplicación que requiera una API RESTful con autenticación segura y gestión de usuarios preconfigurada.
 
-- **Autenticación Segura**: Implementación de JSON Web Tokens (JWT) mediante `djangorestframework-simplejwt` para proteger los endpoints.
-- **Gestión de Usuarios**: Registro de nuevos usuarios y autenticación (Login).
-- **Registro de Interacciones**: Modelo dedicado para almacenar las interacciones (comandos y respuestas) entre el usuario y el asistente.
-- **API Navegable**: Uso de ViewSets y Routers de DRF para una exploración sencilla de la API.
+## 🚀 Funcionalidades Base
+
+Este template incluye "out-of-the-box":
+
+- **Autenticación JWT**: Sistema completo de login y refresco de tokens listo para usar (`simplejwt`).
+- **Gestión de Usuarios**: Endpoints para registro y consulta de usuarios.
+- **Estructura Escalable**: Configuración organizada para seguir las mejores prácticas de Django.
+- **CORS Configurado**: Listo para integrarse con clientes Frontend (React, Vue, Angular, etc.).
+- **Base de Datos Flexible**: Configurado para PostgreSQL, pero fácilmente adaptable a cualquier motor soportado por Django.
+
+## 💡 Módulo de Ejemplo (Demo)
+
+Para demostrar cómo extender este template, se incluye un módulo de ejemplo llamado `asistente_virtual` que simula una lógica de negocio simple:
+
+- **Interacciones**: Un modelo de ejemplo para guardar datos relacionadados con un usuario.
+  - _Nota: Puedes eliminar o modificar este módulo para adaptarlo a tu propia lógica de negocio._
 
 ## 🛠️ Stack Tecnológico
 
-Este proyecto utiliza las siguientes tecnologías y librerías clave:
+- **Core**: Python 3.x, Django 5.x
+- **API**: Django REST Framework 3.x
+- **Seguridad**: JWT (JSON Web Tokens)
+- **Base de Datos**: PostgreSQL / SQLite (Dev)
 
-- **Lenguaje**: [Python 3.x](https://www.python.org/)
-- **Framework Web**: [Django 5.1.3](https://www.djangoproject.com/)
-- **API Framework**: [Django REST Framework 3.15.2](https://www.django-rest-framework.org/)
-- **Autenticación**: [Simple JWT 5.3.1](https://django-rest-framework-simplejwt.readthedocs.io/)
-- **Base de Datos**: Configurado para **PostgreSQL** (ver `models.py` y `requirements.txt` con `psycopg`), aunque por defecto puede correr con SQLite para desarrollo.
-- **Servidor ASGI**: `asgiref`
-- **CORS**: `django-cors-headers` para permitir peticiones desde el frontend.
+## 🔌 Endpoints de la Plantilla
 
-## 📂 Estructura del Proyecto
+### Autenticación (Listos para usar)
 
-- `Backend/asistente_virtual/api/`: Contiene la lógica principal de la API.
-  - `models.py`: Define los modelos `Usuario` (custom) y `Interaccion`.
-  - `serializers.py`: Transformación de datos y validaciones. Nota: Se usa el modelo `auth.User` de Django para la autenticación real.
-  - `views.py`: Controladores (ViewSets y APIViews) que manejan las peticiones HTTP.
-  - `urls.py`: Definición de rutas de la API.
+- `POST /api/token/`: Login (Obtener Token).
+- `POST /api/token/refresh/`: Refrescar Token.
+- `POST /api/registro/`: Registro de usuarios.
 
-## 🔌 Endpoints Principales
+## ⚙️ Cómo usar este Template
 
-### Autenticación
-
-- `POST /api/token/`: Obtener par de tokens (Access y Refresh) enviando `username` y `password`.
-- `POST /api/token/refresh/`: Refrescar el token de acceso.
-- `POST /api/registro/`: Registrar un nuevo usuario.
-
-### Recursos
-
-- `GET /api/usuarios/`: Listar usuarios (Requiere autenticación).
-- `POST /api/interacciones/`: Guardar una nueva interacción.
-- `GET /api/interacciones/`: Historial de interacciones.
-
-## ⚙️ Instalación y Ejecución
-
-1.  **Clonar el repositorio**
+1.  **Clonar este repositorio**
 
     ```bash
     git clone git@github.com:Jeremitc/BackendDjangoRestApi.git
-    cd BackendDjangoRestApi/Backend
     ```
 
-2.  **Crear entorno virtual (Opcional pero recomendado)**
+2.  **Instalar dependencias**
 
     ```bash
-    python -m venv venv
-    # Windows
-    .\venv\Scripts\activate
-    # Linux/Mac
-    source venv/bin/activate
+    cd Backend/asistente_virtual
+    pip install -r requirements.txt
     ```
 
-3.  **Instalar dependencias**
+3.  **Configurar Variables de Entorno**
+
+    - Asegúrate de configurar tu base de datos en `settings.py` o variables de entorno.
+
+4.  **Ejecutar Migraciones**
 
     ```bash
-    pip install -r asistente_virtual/requirements.txt
-    ```
-
-4.  **Migraciones**
-
-    ```bash
-    cd asistente_virtual
     python manage.py migrate
     ```
 
-5.  **Ejecutar servidor**
+5.  **Iniciar Servidor**
     ```bash
     python manage.py runserver
     ```
+
+---
+
+_Este proyecto es un boilerplate para acelerar el desarrollo de tus próximos backends con Django._
